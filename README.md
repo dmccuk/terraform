@@ -14,8 +14,8 @@ Change these values:
   * terraform.tfvars:secret_key = "VALUE_YOUR_SECRET_KEY"
 Now run:
 
-# terraform plan
-# terraform apply
+#> terraform plan
+#> terraform apply
 
 Once it's created and you set up and email, you will be able to visit the public webpage from the IP address you've been sent.
 
