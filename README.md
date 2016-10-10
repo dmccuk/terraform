@@ -9,10 +9,10 @@ Pre-Requisites:
 
 Change these values:
 
-main.tf:    security_groups = ["VALUE"]
-main.tf:      private_key = "${file("VALUE.pem")}"
-terraform.tfvars:access_key = "VALUE_YOUR_ACCESS_KEY"
-terraform.tfvars:secret_key = "VALUE_YOUR_SECRET_KEY"
+  main.tf:    security_groups = ["VALUE"]
+  main.tf:      private_key = "${file("VALUE.pem")}"
+  terraform.tfvars:access_key = "VALUE_YOUR_ACCESS_KEY"
+  terraform.tfvars:secret_key = "VALUE_YOUR_SECRET_KEY"
 
 
 Now run:
