@@ -8,7 +8,7 @@ Pre-Requisites:
 # git clone ...
 
 Change these values:
-  * main.tf:    security_groups = ["VALUE"]
+  * main.tf:    security_groups = ["VALUE"] //Use the group name NOT groupID
   * main.tf:      private_key = "${file("VALUE.pem")}"
   * terraform.tfvars:access_key = "VALUE_YOUR_ACCESS_KEY"
   * terraform.tfvars:secret_key = "VALUE_YOUR_SECRET_KEY"
