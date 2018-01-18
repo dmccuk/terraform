@@ -33,7 +33,8 @@ variable "region" {
 
 First we should run Terraform plan. This will check our code for syntax and report any issue. If it runs clean it will give you some outout showing you you are ready to proceed.
 
-```# terraform plan
+```
+# terraform plan
 Refreshing Terraform state in-memory prior to plan...
 The refreshed state will be used to calculate this plan, but will not be
 persisted to local or remote state storage.
