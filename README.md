@@ -181,6 +181,7 @@ State path:
 
 Once your new EC2 instance is created you should receive an email. Check your spam filter if it doesn't turn up within a couple of minutes. Your EC2 instance IP address will be inside the email (you can also get the public IP address from the AWS console). Open up you internet browser (chrome :)) and enter the IP address. You should see the following:
 
+![Alt text](aws_webapp.PNG?raw=true)
 
 ## Further information:
 
