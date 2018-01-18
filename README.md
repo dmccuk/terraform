@@ -2,12 +2,13 @@
 ---
 ## Pre-Requisites:
 
-1. Install Terraform
-2. Have an account on AWS (free Tier if possible)
+1. Install Terraform.
+2. Have an account on AWS (free Tier if possible).
 3. Some basic knowledge of AWS.
-  * Creating and using .pem file
-  * Setting up basic security groups
-  * Creating Access keys and access secrets
+  * Creating and using .pem file.
+  * Setting up basic security groups.
+  * Creating Access keys and access secrets.
+  * Familiure with the AWS console.
 
 
 ## Now on your server (where you have installed Terraform)
@@ -31,7 +32,7 @@ variable "region" {
 
 ## Running Terraform to build in AWS
 
-First we should run Terraform plan. This will check our code for syntax and report any issue. If it runs clean it will give you some outout showing you you are ready to proceed.
+First we should run Terraform plan. This will check our code for syntax and report any issue. If it runs clean it will give you some outout showing you you are ready to proceed. <b>Output below is based on my configuration</b>
 
 ```
 # terraform plan
@@ -81,21 +82,110 @@ Plan: 1 to add, 0 to change, 0 to destroy.
 [root@fed-25 terraform]# 
 ```
 
-Now, once the plan completes successfully, we can run terraform apply and 
-$ terraform apply
+Now, once the plan completes successfully, we can run terraform apply and watch our EC2 instance get created:
+```
+# terraform apply
+aws_instance.web: Creating...
+  ami:                          "" => "ami-c90195b0"
+  associate_public_ip_address:  "" => "<computed>"
+  availability_zone:            "" => "<computed>"
+  ebs_block_device.#:           "" => "<computed>"
+  ephemeral_block_device.#:     "" => "<computed>"
+  instance_state:               "" => "<computed>"
+  instance_type:                "" => "t2.micro"
+  ipv6_addresses.#:             "" => "<computed>"
+  key_name:                     "" => "dmccuk"
+  network_interface.#:          "" => "<computed>"
+  network_interface_id:         "" => "<computed>"
+  placement_group:              "" => "<computed>"
+  primary_network_interface_id: "" => "<computed>"
+  private_dns:                  "" => "<computed>"
+  private_ip:                   "" => "<computed>"
+  public_dns:                   "" => "<computed>"
+  public_ip:                    "" => "<computed>"
+  root_block_device.#:          "" => "<computed>"
+  security_groups.#:            "" => "1"
+  security_groups.1894743826:   "" => "ssh_and_web"
+  source_dest_check:            "" => "true"
+  subnet_id:                    "" => "<computed>"
+  tags.%:                       "" => "1"
+  tags.Name:                    "" => "opsmotion"
+  tenancy:                      "" => "<computed>"
+  vpc_security_group_ids.#:     "" => "<computed>"
+aws_instance.web: Still creating... (10s elapsed)
+aws_instance.web: Still creating... (20s elapsed)
+aws_instance.web: Provisioning with 'file'...
+aws_instance.web: Still creating... (30s elapsed)
+aws_instance.web: Still creating... (40s elapsed)
+aws_instance.web: Still creating... (50s elapsed)
+aws_instance.web: Still creating... (1m0s elapsed)
+aws_instance.web: Still creating... (1m10s elapsed)
+aws_instance.web: Still creating... (1m20s elapsed)
+aws_instance.web: Still creating... (1m30s elapsed)
+aws_instance.web: Provisioning with 'remote-exec'...
+aws_instance.web (remote-exec): Connecting to remote host via SSH...
+aws_instance.web (remote-exec):   Host: 59.124.211.129
+aws_instance.web (remote-exec):   User: ec2-user
+aws_instance.web (remote-exec):   Password: false
+aws_instance.web (remote-exec):   Private key: true
+aws_instance.web (remote-exec):   SSH Agent: false
+aws_instance.web (remote-exec): Connected!
+aws_instance.web: Still creating... (1m40s elapsed)
+aws_instance.web (remote-exec): Loaded plugins: amazon-id, rhui-lb,
+aws_instance.web (remote-exec):               : search-disabled-repos
+aws_instance.web (remote-exec): rhui-REGION-clie | 2.9 kB     00:00
+aws_instance.web (remote-exec): rhui-REGION-rhel | 3.5 kB     00:00
+aws_instance.web (remote-exec): rhui-REGION-rhel | 3.8 kB     00:00
+aws_instance.web: Still creating... (1m50s elapsed)
+aws_instance.web (remote-exec): (2/7): rhui-REG 0% |    0 B   --:-- ETA
+
+<REDACTED>...
+
+aws_instance.web (remote-exec): Installed:
+aws_instance.web (remote-exec):   httpd.x86_64 0:2.4.6-67.el7_4.6
+aws_instance.web (remote-exec):   mailx.x86_64 0:12.5-16.el7
+aws_instance.web (remote-exec):   mlocate.x86_64 0:0.26-6.el7
+aws_instance.web (remote-exec):   wget.x86_64 0:1.14-15.el7_4.1
+
+aws_instance.web (remote-exec): Dependency Installed:
+aws_instance.web (remote-exec):   apr.x86_64 0:1.4.8-3.el7_4.1
+aws_instance.web (remote-exec):   apr-util.x86_64 0:1.5.2-6.el7
+aws_instance.web (remote-exec):   httpd-tools.x86_64 0:2.4.6-67.el7_4.6
+aws_instance.web (remote-exec):   mailcap.noarch 0:2.1.41-2.el7
+aws_instance.web (remote-exec):   redhat-logos.noarch 0:70.0.3-6.el7
+
+aws_instance.web (remote-exec): Complete!
+aws_instance.web (remote-exec): Redirecting to /bin/systemctl start httpd.service
+aws_instance.web: Creation complete (ID: i-0b5032c1524883802)
+
+Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
+
+The state of your infrastructure has been saved to the path
+below. This state is required to modify and destroy your
+infrastructure, so keep it safe. To inspect the complete state
+use the `terraform show` command.
+
+State path: 
+# 
 ```
 
-Once it's created and you set up and email, you will be able to visit the public webpage from the IP address you've been sent.
+Once your new EC2 instance is created you should receive an email. Check your spam filter if it doesn't turn up within a couple of minutes. Your EC2 instance IP address will be available. Open up you internet browser (chrome :)) and enter the IP address. You should see the following:
+
+## Further information:
+
+Depending on the OS you have decided to install (the AMI), you will need different logins.
 
  * Ubuntu AMI's users are either ubuntu or root
  * Red Hat AMI user is ec2-user
 Login like this:
 
-ssh ec2-user@IPADDR -i /path/to/your/.pem
-ssh ubuntu@IPADDR -i /path/to/your/.pem
+```$ ssh ec2-user@IPADDR -i /path/to/your/.pem```
+```$ ssh ubuntu@IPADDR -i /path/to/your/.pem```
 
 When you're finished, remember to remove the instance:
 
- terraform destroy
+```$ terraform destroy```
 
-Enjoy...
+Please share with your colleagues and let me know if you found this useful.
+
+Dennis McCarthy
