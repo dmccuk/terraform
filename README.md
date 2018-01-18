@@ -8,10 +8,10 @@ In my example, we are going to setup and launch one AWS EC2 instance. Please rea
 1. Install Terraform.
 2. Have an account on AWS (free Tier if possible).
 3. Some basic knowledge of AWS.
-  * Creating and using .pem file.
-  * Setting up basic security groups.
-  * Creating Access keys and access secrets.
-  * Familiure with the AWS console.
+  * Creating and download your .pem file.
+  * Set up a security group.
+  * Create your Access key and access secret (one time creation).
+  * Familiarity with the AWS console.
 
 ## Now on your server (where you have installed Terraform)
 
@@ -23,9 +23,9 @@ Make the following changes to these files in the code you have cloned from me in
 
 Change these values:
   * main.tf:    ```security_groups = ["VALUE"]``` # Use the group-name NOT groupID.
-  * main.tf:    ```private_key = "${file("VALUE.pem")}"``` # Use your .pem key to ssh onto the server once created.
-  * terraform.tfvars: ```access_key = "VALUE_YOUR_ACCESS_KEY"```
-  * terraform.tfvars: ```secret_key = "VALUE_YOUR_SECRET_KEY"```
+  * main.tf:    ```private_key = "${file("VALUE.pem")}"``` # Use your .pem key here. /dir/name.pem.
+  * terraform.tfvars: ```access_key = "VALUE_YOUR_ACCESS_KEY"``` # Add your access key
+  * terraform.tfvars: ```secret_key = "VALUE_YOUR_SECRET_KEY"``` # Add your secret key
   * files/script.sh: ```MAIL=`sudo cat /tmp/ip.dm | mailx -s "Hello from "$HOSTNAME your@email.com` ```
   * Update the region you want to build in. Check AWS for the syntax for each region:
 ```
