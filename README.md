@@ -1,3 +1,4 @@
+![Alt text](logo-hashicorp-3f10732f.svg?raw=true)
 # Getting started with Terraform
 
 In my example, we are going to setup and launch one AWS EC2 instance. Please read the Pre-requisites below and make sure you are happy to proceed.
