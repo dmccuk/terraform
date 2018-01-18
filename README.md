@@ -179,17 +179,21 @@ use the `terraform show` command.
 State path: 
 # 
 ```
+Once created, if you check the AWS console, you will see the EC2 instance available:
+![Alt text](aws_console.PNG?raw=true)
+
 
 Once your new EC2 instance is created you should receive an email. Check your spam filter if it doesn't turn up within a couple of minutes. Your EC2 instance IP address will be inside the email (you can also get the public IP address from the AWS console). Open up you internet browser (chrome :)) and enter the IP address. You should see the following:
-
 ![Alt text](aws_webapp.PNG?raw=true)
+
 
 ## Further information:
 
-Depending on the OS you have decided to install (the AMI), you will need different logins.
+Depending on the OS you have decided to install (the AMI), you will need to use different users to logins.
 
  * Ubuntu AMI's users are either ubuntu or root
  * Red Hat AMI user is ec2-user
+
 Login like this:
 
 ```$ ssh ec2-user@IPADDR -i /path/to/your/.pem```
@@ -218,6 +222,11 @@ Destroy complete! Resources: 1 destroyed.
 # 
 
 ```
+Checking the A=AWS console, you will see your instance shutdown, before being terminated:
+
+![Alt text](aws_console1.PNG?raw=true)
+
+![Alt text](aws_console2.PNG?raw=true)
 
 Please share with your colleagues and let me know if you found this useful.
 
