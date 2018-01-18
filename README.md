@@ -1,4 +1,6 @@
-# This a basic Terraform setup to launch one AWS EC2 instance.
+# Getting started with Terraform
+
+In my example, we are going to setup and launch one AWS EC2 instance. Please read the Pre-requisites below and make sure you are happy to proceed.
 ---
 ## Pre-Requisites:
 
@@ -10,12 +12,13 @@
   * Creating Access keys and access secrets.
   * Familiure with the AWS console.
 
-
 ## Now on your server (where you have installed Terraform)
+
+Take a copy of my git repo. It contains all the files you need for this example.
 
 ```$ git clone 	https://github.com/dmccuk/terraform.git ```
 
-Make the following changes to these files:
+Make the following changes to these files in the code you have cloned from me in Git:
 
 Change these values:
   * main.tf:    ```security_groups = ["VALUE"]``` # Use the group-name NOT groupID.
@@ -23,16 +26,23 @@ Change these values:
   * terraform.tfvars: ```access_key = "VALUE_YOUR_ACCESS_KEY"```
   * terraform.tfvars: ```secret_key = "VALUE_YOUR_SECRET_KEY"```
   * files/script.sh: ```MAIL=`sudo cat /tmp/ip.dm | mailx -s "Hello from "$HOSTNAME your@email.com` ```
-  * Update the region you want to build in:
+  * Update the region you want to build in. Check AWS for the syntax for each region:
 ```
 variable "region" {
     default = "eu-west-1"
 }
 ```
 
+## The post build script.sh
+I've created a post build script (files/script.sh) that does the following:
+  * updates the software of the EC2 instance.
+  * installs apache httpd and a couple of other useful programs.
+  * Creates the index.html file with a message.
+  * Collects your public IP address and emails it back to you (add your email address!)
+
 ## Running Terraform to build in AWS
 
-First we should run Terraform plan. This will check our code for syntax and report any issue. If it runs clean it will give you some outout showing you you are ready to proceed. <b>Output below is based on my configuration</b>
+First we should run Terraform plan. This will check our code for syntax and report any issue. If it runs clean it will give you some outout showing you you are ready to proceed. <b>Output below is based on my configuration</b>. If you get errors. please go back and check through your code. I am planning to update some common issues and the bottom of this page so go down and check.
 
 ```
 # terraform plan
@@ -169,7 +179,8 @@ State path:
 # 
 ```
 
-Once your new EC2 instance is created you should receive an email. Check your spam filter if it doesn't turn up within a couple of minutes. Your EC2 instance IP address will be available. Open up you internet browser (chrome :)) and enter the IP address. You should see the following:
+Once your new EC2 instance is created you should receive an email. Check your spam filter if it doesn't turn up within a couple of minutes. Your EC2 instance IP address will be inside the email (you can also get the public IP address from the AWS console). Open up you internet browser (chrome :)) and enter the IP address. You should see the following:
+
 
 ## Further information:
 
@@ -184,7 +195,27 @@ Login like this:
 
 When you're finished, remember to remove the instance:
 
-```$ terraform destroy```
+```# terraform destroy
+Do you really want to destroy?
+  Terraform will delete all your managed infrastructure.
+  There is no undo. Only 'yes' will be accepted to confirm.
+
+  Enter a value: yes
+
+aws_instance.web: Refreshing state... (ID: i-0b5032c1524883802)
+aws_instance.web: Destroying... (ID: i-0b5032c1524883802)
+aws_instance.web: Still destroying... (ID: i-0b5032c1524883802, 10s elapsed)
+aws_instance.web: Still destroying... (ID: i-0b5032c1524883802, 20s elapsed)
+aws_instance.web: Still destroying... (ID: i-0b5032c1524883802, 30s elapsed)
+aws_instance.web: Still destroying... (ID: i-0b5032c1524883802, 40s elapsed)
+aws_instance.web: Still destroying... (ID: i-0b5032c1524883802, 50s elapsed)
+aws_instance.web: Still destroying... (ID: i-0b5032c1524883802, 1m0s elapsed)
+aws_instance.web: Destruction complete
+
+Destroy complete! Resources: 1 destroyed.
+# 
+
+```
 
 Please share with your colleagues and let me know if you found this useful.
 
