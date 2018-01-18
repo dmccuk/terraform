@@ -8,8 +8,8 @@ resource "aws_instance" "web" {
     ami             = "ami-f9dd458a"
     instance_type   = "t2.micro"
     tags { Name     = "Terraform-test" }
-    security_groups = ["VALUE"]
-    key_name        = "terraform_ssh"
+    security_groups = ["CHANGE_ME"]
+    key_name        = "CHANGE_ME"
     provisioner "file" {
         source      = "files/scripts.sh"
         destination = "/tmp/scripts.sh"
