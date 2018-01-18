@@ -22,8 +22,9 @@ Take a copy of my git repo. It contains all the files you need for this example.
 Make the following changes to these files in the code you have cloned from me in Git:
 
 Change these values:
-  * main.tf:    ```security_groups = ["VALUE"]``` # Use the group-name NOT groupID.
+  * main.tf:    ```security_groups = ["CHANGE_ME"]``` # Use the group-name NOT groupID.
   * main.tf:    ```private_key = "${file("VALUE.pem")}"``` # Use your .pem key here. /dir/name.pem.
+  * main.tf:    ```key_name        = "CHANGE_ME"``` # Insert your key name.
   * terraform.tfvars: ```access_key = "VALUE_YOUR_ACCESS_KEY"``` # Add your access key
   * terraform.tfvars: ```secret_key = "VALUE_YOUR_SECRET_KEY"``` # Add your secret key
   * files/script.sh: ```MAIL=`sudo cat /tmp/ip.dm | mailx -s "Hello from "$HOSTNAME your@email.com` ```
