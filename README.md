@@ -5,7 +5,7 @@ In my example, we are going to setup and launch one AWS EC2 instance. Please rea
 ---
 ## Pre-Requisites:
 
-1. Install Terraform.
+1. Install Terraform. (link)[https://www.terraform.io/intro/getting-started/install.html]
 2. Have an account on AWS (free Tier if possible).
 3. Some basic knowledge of AWS.
   * Creating and download your .pem file.
