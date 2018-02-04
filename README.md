@@ -5,19 +5,20 @@ In my example, we are going to setup and launch one AWS EC2 instance. Please rea
 ---
 ## Pre-Requisites:
 
-1. Install Terraform. (link)[https://www.terraform.io/intro/getting-started/install.html]
-2. Have an account on AWS (free Tier if possible).
+1. Install Terraform. [link](https://www.terraform.io/intro/getting-started/install.html)
+2. Have an account on AWS (free Tier if possible). [link](https://aws.amazon.com/free)
 3. Some basic knowledge of AWS.
-  * Creating and download your .pem file.
-  * Set up a security group.
-  * Create your Access key and access secret (one time creation).
+  * Creating and download your key pair (.pem file). [link](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html)
+  * Set up a VPC security group. [link](https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html)
+  * Create your Access key and access secret (one time creation). [link](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey)
   * Familiarity with the AWS console.
+  * AWS training - I recommend Ryan Kroonemburg on Udemy. [link](https://www.udemy.com/user/ryankroonenburg/)
 
 ## Now on your server (where you have installed Terraform)
 
 Take a copy of my git repo. It contains all the files you need for this example.
 
-```$ git clone 	https://github.com/dmccuk/terraform.git ```
+```$ git clone 	https://github.com/opsmotion/terraform.git ```
 
 Make the following changes to these files in the code you have cloned from me in Git:
 
