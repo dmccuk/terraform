@@ -44,7 +44,7 @@ oscap xccdf eval \
  --results-arf arf.xml \
  --report common-report.html \
  /usr/share/xml/scap/ssg/content/ssg-rhel7-ds.xml
-mkdir p /var/www/html/reports
+mkdir -p /var/www/html/reports
 }
 
 pre_report()
