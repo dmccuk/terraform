@@ -1,8 +1,14 @@
-#!/usr/bin/env bash
+#!/usr/bin/bash
 
+# Update and install required packages
+update_packages()
+{
 sudo yum update -y
-sudo yum install mlocate mailx wget curl httpd -y
+sudo yum install httpd mlocate mailx wget curl git openscap-scanner scap-security-guide -y
+}
 
+webpage()
+{
 sudo cat > /var/www/html/index.html <<EOF
 <!doctype html>
 <title>Site Maintenance</title>
@@ -23,8 +29,74 @@ sudo cat > /var/www/html/index.html <<EOF
     </div>
 </article>
 EOF
+}
 
+start_httpd()
+{
 sudo service httpd start
+}
+
+openscap_report()
+{
+# Run openscap report
+oscap xccdf eval \
+ --profile xccdf_org.ssgproject.content_profile_common \
+ --results-arf arf.xml \
+ --report common-report.html \
+ /usr/share/xml/scap/ssg/content/ssg-rhel7-ds.xml
+mkdir p /var/www/html/reports
+}
+
+pre_report()
+{
+cp common-report.html /var/www/html/reports/pre-common-report.html
+}
+
+post_report()
+{
+cp common-report.html /var/www/html/reports/post-common-report.html
+}
+
+openscap_email()
+{
+# email out the openscap report
+echo "Openscap - Common report" | mailx -s "Openscap - common report" -a "common-report.html" your.email@domain.com
+}
+
+grab_ip()
+{
 IP=`sudo curl -s http://169.254.169.254/latest/meta-data/public-ipv4 > /tmp/ip.dm`
-MAIL=`sudo cat /tmp/ip.dm | mailx -s "Hello from "$HOSTNAME VALUE_your@email.com`
+}
+
+email_ip()
+{
+MAIL=`sudo cat /tmp/ip.dm | mailx -s "Hello from "$HOSTNAME dyour.email@domain.com
 $MAIL
+}
+
+install_puppet()
+{
+rpm -Uvh https://yum.puppetlabs.com/puppet5/puppet5-release-el-7.noarch.rpm
+yum -y install puppet-agent
+export PATH=$PATH:/opt/puppetlabs/bin:
+}
+
+audit_rules()
+{
+yes | cp /usr/share/doc/audit-2.7.6/rules/30-stig.rules /etc/audit/rules.d/audit.rules
+service auditd restart
+}
+
+#run the functions:
+update_packages
+#install_puppet
+webpage
+start_httpd
+openscap_report
+pre_report
+audit_rules
+openscap_report
+post_report
+#openscap_email
+grab_ip
+email_ip
