@@ -197,6 +197,8 @@ Now, once the plan completes successfully, we can run terraform apply and watch 
 Add output for terraform apply...
 
 ````
+</p></details>
+
 Once created, if you check the AWS console, you will see the EC2 instance available:
 ![Alt text](aws_console.PNG?raw=true)
 
