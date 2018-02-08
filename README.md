@@ -42,9 +42,9 @@ Optional:
 variable "region" {
     default = "eu-west-1"
 }
-```
 
-## The post build script.sh
+```
+### The post build script.sh
 I've created a post build script (files/script.sh) that does the following:
   * updates the software of the EC2 instance.
   * installs httpd and openscap + a couple of other useful programs.
@@ -52,13 +52,13 @@ I've created a post build script (files/script.sh) that does the following:
   * Collects your EC2 public IP address and emails it back to you (add your email address!)
   * Run openscap and produces a report (both Pre and post report under .../html/reports
 
-## Running Terraform to build in AWS
-
+### Running Terraform to build in AWS
 First, initiate Terraform in your working directory:
 <details>
  <summary>Terraform init output</summary>
   <p>
-   
+
+
 ````
 # terraform init
 
@@ -87,6 +87,7 @@ rerun this command to reinitialize your working directory. If you forget, other
 commands will detect it and remind you to do so if necessary.
 ````
 </p></details>
+
 
 Next we run Terraform plan. This will check our code for syntax and report any issue. If it runs clean it will give you some outout showing you you are ready to proceed. <b>Output below is based on my configuration</b>. If you get errors. please go back and check through your code. I am planning to update some common issues and the bottom of this page so go down and check.
 
@@ -190,6 +191,7 @@ can't guarantee that exactly these actions will be performed if
 
 ```
 </p></details>
+
 
 If there are any typo's or you forgot to add update your personal settings you will get am error. Fix the error and repeat.
 
@@ -1094,9 +1096,9 @@ aws_instance.web (remote-exec):  git   x86_64 1.8.3.1-12.el7_4  rhui-REGI
 ````
 </p></details>
 
+
 Once created, if you check the AWS console, you will see the EC2 instance available:
 ![Alt text](aws_console.PNG?raw=true)
-
 
 Once your new EC2 instance is created you should receive an email. Check your spam filter if it doesn't turn up within a couple of minutes. Your EC2 instance IP address will be inside the email (you can also get the public IP address from the AWS console). Open up you internet browser (chrome :)) and enter the IP address. You should see the following:
 ![Alt text](aws_webapp.PNG?raw=true)
@@ -1109,6 +1111,7 @@ The PRE report:
 
 The POST report:
 ![Alt text](openscap_reports_post.PNG?raw=true)
+
 
 As you can see the difference between the PRE and POST reports. You server has been hardened for the purposes of this demo.
 
@@ -1125,28 +1128,48 @@ Login like this:
 ```$ ssh ubuntu@IPADDR -i /path/to/your/.pem```
 
 When you're finished, remember to remove the instance:
+````
+# terraform destroy
+aws_instance.web: Refreshing state... (ID: i-0f3ff443018600702)
+aws_security_group.ssh_web: Refreshing state... (ID: sg-6db46d17)
 
-```# terraform destroy
+An execution plan has been generated and is shown below.
+Resource actions are indicated with the following symbols:
+  - destroy
+
+Terraform will perform the following actions:
+
+  - aws_instance.web
+
+  - aws_security_group.ssh_web
+
+
+Plan: 0 to add, 0 to change, 2 to destroy.
+
 Do you really want to destroy?
-  Terraform will delete all your managed infrastructure.
+  Terraform will destroy all your managed infrastructure, as shown above.
   There is no undo. Only 'yes' will be accepted to confirm.
 
   Enter a value: yes
 
-aws_instance.web: Refreshing state... (ID: i-0b5032c1524883802)
-aws_instance.web: Destroying... (ID: i-0b5032c1524883802)
-aws_instance.web: Still destroying... (ID: i-0b5032c1524883802, 10s elapsed)
-aws_instance.web: Still destroying... (ID: i-0b5032c1524883802, 20s elapsed)
-aws_instance.web: Still destroying... (ID: i-0b5032c1524883802, 30s elapsed)
-aws_instance.web: Still destroying... (ID: i-0b5032c1524883802, 40s elapsed)
-aws_instance.web: Still destroying... (ID: i-0b5032c1524883802, 50s elapsed)
-aws_instance.web: Still destroying... (ID: i-0b5032c1524883802, 1m0s elapsed)
-aws_instance.web: Destruction complete
+aws_instance.web: Destroying... (ID: i-0f3ff443018600702)
+aws_security_group.ssh_web: Destroying... (ID: sg-6db46d17)
+aws_instance.web: Still destroying... (ID: i-0f3ff443018600702, 10s elapsed)
+aws_security_group.ssh_web: Still destroying... (ID: sg-6db46d17, 10s elapsed)
+aws_instance.web: Still destroying... (ID: i-0f3ff443018600702, 20s elapsed)
+aws_security_group.ssh_web: Still destroying... (ID: sg-6db46d17, 20s elapsed)
+aws_instance.web: Still destroying... (ID: i-0f3ff443018600702, 30s elapsed)
+aws_security_group.ssh_web: Still destroying... (ID: sg-6db46d17, 30s elapsed)
+aws_instance.web: Still destroying... (ID: i-0f3ff443018600702, 40s elapsed)
+aws_security_group.ssh_web: Still destroying... (ID: sg-6db46d17, 40s elapsed)
+aws_security_group.ssh_web: Destruction complete after 49s
+aws_instance.web: Still destroying... (ID: i-0f3ff443018600702, 50s elapsed)
+aws_instance.web: Destruction complete after 51s
 
-Destroy complete! Resources: 1 destroyed.
-# 
+Destroy complete! Resources: 2 destroyed.
 
-```
+````
+
 Checking the A=AWS console, you will see your instance shutdown, before being terminated:
 
 ![Alt text](aws_console1.PNG?raw=true)
