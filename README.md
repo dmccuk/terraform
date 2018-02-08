@@ -20,6 +20,7 @@ In my example, we are going to setup and launch one AWS EC2 instance. Please rea
 Create /opt/demo:
 ````
 # mkdir -p /opt/demo
+# cd /opt/demo
 ````
 
 Take a copy of my git repo. It contains all the files you need for this example.
