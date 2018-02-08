@@ -26,7 +26,8 @@ Create /opt/demo:
 Take a copy of my git repo. It contains all the files you need for this example.
 
 ```
-$ git clone 	https://github.com/opsmotion/terraform.git
+# git clone 	https://github.com/opsmotion/terraform.git
+# cd /opt/demo/terraform
 ```
 
 Make the following changes to these files in the code you have cloned from me in Git:
@@ -195,6 +196,15 @@ can't guarantee that exactly these actions will be performed if
 
 
 If there are any typo's or you forgot to add update your personal settings you will get am error. Fix the error and repeat.
+I.E.
+````
+Error: Error refreshing state: 1 error(s) occurred:
+
+* provider.aws: InvalidClientTokenId: The security token included in the request is invalid.
+	status code: 403, request id: f331f5f9-0cbd-11e8-b970-db71bcb337e0
+````
+This error means you haven't put a valid Access & Secret key in the correct file - terraform.tfvars!
+
 
 Now, once the plan completes successfully, we can run terraform apply and watch our EC2 instance get created:
 <details>
