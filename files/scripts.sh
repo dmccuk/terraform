@@ -70,7 +70,7 @@ IP=`sudo curl -s http://169.254.169.254/latest/meta-data/public-ipv4 > /tmp/ip.d
 
 email_ip()
 {
-MAIL=`sudo cat /tmp/ip.dm | mailx -s "Hello from "$HOSTNAME dyour.email@domain.com
+MAIL=`sudo cat /tmp/ip.dm | mailx -s "Hello from "$HOSTNAME dyour.email@domain.com`
 $MAIL
 }
 
@@ -99,4 +99,4 @@ openscap_report
 post_report
 #openscap_email
 grab_ip
-email_ip
+#email_ip
