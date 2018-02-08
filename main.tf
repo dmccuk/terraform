@@ -31,7 +31,7 @@ resource "aws_security_group" "ssh_web" {
 }
 
 resource "aws_instance" "web" {
-    ami             = "ami-f9dd458a"
+    ami             = "ami-c90195b0" #Red Hat 7.4
     instance_type   = "t2.micro"
     tags { Name     = "Terraform-test" }
     security_groups = ["terraform-fw"]
