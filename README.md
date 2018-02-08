@@ -55,6 +55,10 @@ I've created a post build script (files/script.sh) that does the following:
 ## Running Terraform to build in AWS
 
 First, initiate Terraform in your working directory:
+<details>
+ <summary>Terraform init output</summary>
+  <p>
+   
 ````
 # terraform init
 
@@ -82,11 +86,12 @@ If you ever set or change modules or backend configuration for Terraform,
 rerun this command to reinitialize your working directory. If you forget, other
 commands will detect it and remind you to do so if necessary.
 ````
+</p></summary>
 
 Next we run Terraform plan. This will check our code for syntax and report any issue. If it runs clean it will give you some outout showing you you are ready to proceed. <b>Output below is based on my configuration</b>. If you get errors. please go back and check through your code. I am planning to update some common issues and the bottom of this page so go down and check.
 
 <details>
- <summary>Expand for output</summary>
+ <summary>Terraform plan output</summary>
   <p>
    
 ```
@@ -190,7 +195,7 @@ If there are any typo's or you forgot to add update your personal settings you w
 
 Now, once the plan completes successfully, we can run terraform apply and watch our EC2 instance get created:
 <details>
- <summary>Expand for output</summary>
+ <summary>Terraform apply output</summary>
   <p>
    
 ````
@@ -1092,13 +1097,20 @@ aws_instance.web (remote-exec):  git   x86_64 1.8.3.1-12.el7_4  rhui-REGI
 Once created, if you check the AWS console, you will see the EC2 instance available:
 ![Alt text](aws_console.PNG?raw=true)
 
-All the Pos build scripts have also been run so Openscap pre & Post reports will have been created. Let's take a look.
-
-
 
 Once your new EC2 instance is created you should receive an email. Check your spam filter if it doesn't turn up within a couple of minutes. Your EC2 instance IP address will be inside the email (you can also get the public IP address from the AWS console). Open up you internet browser (chrome :)) and enter the IP address. You should see the following:
 ![Alt text](aws_webapp.PNG?raw=true)
 
+Openscap pre & Post reports will have been created. Let's take a look.
+![Alt text](openscap_reports.PNG?raw=true)
+
+The PRE report:
+![Alt text](openscap_reports_pre.PNG?raw=true)
+
+The POST report:
+![Alt text](openscap_reports_post.PNG?raw=true)
+
+As you can see the difference between the PRE and POST reports. You server has been hardened for the purposes of this demo.
 
 ## Further information:
 
