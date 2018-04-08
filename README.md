@@ -15,18 +15,17 @@ In my example, we are going to setup and launch one AWS EC2 instance. Please rea
 
 ## Setup instructions
 
-### On your server (where you have installed Terraform)
+### On your server/laptop (where you have installed Terraform)
 
 Create /opt/demo:
 ````
-# mkdir -p /opt/demo
-# cd /opt/demo
+# mkdir -p /opt/demo; cd /opt/demo
 ````
 
 Take a copy of my git repo. It contains all the files you need for this example.
 
 ```
-# git clone 	https://github.com/opsmotion/terraform.git
+# git clone https://github.com/opsmotion/terraform.git
 # cd /opt/demo/terraform
 ```
 
@@ -39,7 +38,8 @@ Change these values:
   * terraform.tfvars: ```secret_key = "VALUE_YOUR_SECRET_KEY"``` # Add your secret key
 Optional:
   * files/script.sh: ```MAIL=`sudo cat /tmp/ip.dm | mailx -s "Hello from "$HOSTNAME your@email.com` ```
-  * Update the region you want to build in. Check AWS for the syntax for each region:
+  * Update the region you want to build in. Check AWS for the region syntax. I've defaulted to eu-west-1:
+  * Check this page for the list [link](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html).
 ```
 variable "region" {
     default = "eu-west-1"
