@@ -83,7 +83,7 @@ export PATH=$PATH:/opt/puppetlabs/bin:
 
 audit_rules()
 {
-yes | cp /usr/share/doc/audit-2.7.6/rules/30-stig.rules /etc/audit/rules.d/audit.rules
+yes | cp /usr/share/doc/audit-2.8.1/rules/30-stig.rules /etc/audit/rules.d/audit.rules
 service auditd restart
 }
 

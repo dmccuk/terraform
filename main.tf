@@ -4,8 +4,8 @@ provider "aws" {
     region = "${var.region}"
 }
 
-resource "aws_security_group" "ssh_web" {
-  name = "terraform-fw"
+resource "aws_security_group" "ssh_web_1" {
+  name = "ssh_web_1"
 
   # Inbound HTTP from anywhere
   ingress {
@@ -31,10 +31,10 @@ resource "aws_security_group" "ssh_web" {
 }
 
 resource "aws_instance" "web" {
-    ami             = "ami-c90195b0" #Red Hat 7.4
+    ami             = "ami-7c491f05" #Red Hat 7.5
     instance_type   = "t2.micro"
     tags { Name     = "Terraform-test" }
-    security_groups = ["terraform-fw"]
+    security_groups = ["ssh_web_1"]
     # key_name is your AWS keypair to allow you access
     key_name        = "Add_Your_Keypair_name"
     provisioner "file" {
